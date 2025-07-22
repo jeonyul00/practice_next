@@ -1,0 +1,23 @@
+6️⃣ Dynamic Routes (동적 라우트)
+✅ 폴더명에 []를 씁니다.
+app/blog/[slug]/page.tsx → /blog/hello-world
+
+✅ Catch-all
+app/docs/[...slug]/page.tsx → /docs/a/b/c
+
+✅ Optional Catch-all
+app/docs/[[...slug]]/page.tsx → /docs 또는 /docs/a/b/c
+
+
+7️⃣ Parallel Routes / Grouped Routes
+✅ 괄호로 그룹 폴더를 만들면 URL에 안 나타납니다.
+app/(marketing)/about/page.tsx → `/about`
+app/(dashboard)/settings/page.tsx → `/settings`
+✅ Parallel Routes는 <Slot />으로 병렬 렌더링. 별도 설명 필요하면 말씀하세요.
+
+8️⃣ public/
+✅ 정적 파일 (이미지, 폰트, etc) → public/에 넣으면 /로 바로 접근.
+/public/logo.png → https://example.com/logo.png
+
+
+app 디렉토리 내에는 라우팅 관련된 코드만 넣기
