@@ -3,7 +3,9 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
+    "dev:all": "concurrently \"bun run dev:webhook\" \"bun run dev\"",
     "dev": "next dev",
+    "dev:webhook": "ngrok http --url=darling-deer-concise.ngrok-free.app 3000",
     "build": "next build",
     "start": "next start",
     "lint": "next lint"
@@ -42,6 +44,7 @@
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
     "cmdk": "^1.1.1",
+    "concurrently": "^9.2.0",
     "date-fns": "^4.1.0",
     "dotenv": "^17.2.0",
     "drizzle-orm": "^0.44.3",
@@ -57,6 +60,7 @@
     "react-resizable-panels": "^3.0.3",
     "recharts": "^3.0.2",
     "sonner": "^2.0.5",
+    "svix": "^1.69.0",
     "tailwind-merge": "^3.3.1",
     "tailwindcss-animate": "^1.0.7",
     "vaul": "^1.1.2",
