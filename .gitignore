@@ -1,0 +1,35 @@
+# macOS & 에디터
+.DS_Store
+*.pem
+
+# Logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Yarn PnP
+.pnp.*
+.yarn/install-state.gz
+
+# Testing
+coverage/
+
+# Build artifacts for all sections
+**/.next/
+**/out/
+**/build/
+**/.vercel/
+**/node_modules/
+**/.turbo/
+
+# Env files (section별로 있을 수 있음)
+**/.env*
+!*.example
+
+# TypeScript
+**/*.tsbuildinfo
+**/next-env.d.ts
+
+# Ignore lockfiles if you don’t want to commit them (optional)
+# **/package-lock.json
+# **/yarn.lock
