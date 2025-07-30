@@ -1,14 +1,19 @@
 import { useRouter } from "next/router";
-import React, { ReactNode, useEffect, useState } from "react";
+import { ReactNode, useEffect, useState } from "react";
 import style from "./searchable-layout.module.css";
 
-function SearchableLayout({ children }: { children: ReactNode }) {
+export default function SearchableLayout({
+  children,
+}: {
+  children: ReactNode;
+}) {
   const router = useRouter();
   const [search, setSearch] = useState("");
-  const q = router.query.q;
+
+  const q = router.query.q as string;
 
   useEffect(() => {
-    setSearch(q as string);
+    setSearch(q || "");
   }, [q]);
 
   const onChangeSearch = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -20,8 +25,7 @@ function SearchableLayout({ children }: { children: ReactNode }) {
     router.push(`/search?q=${search}`);
   };
 
-  const onKeyDown = (e: React.KeyboardEvent) => {
-    if (!search || q === search) return;
+  const onKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
     if (e.key === "Enter") {
       onSubmit();
     }
@@ -31,10 +35,10 @@ function SearchableLayout({ children }: { children: ReactNode }) {
     <div>
       <div className={style.searchbar_container}>
         <input
-          onKeyDown={onKeyDown}
-          placeholder="검색어를 입력하세요..."
-          onChange={onChangeSearch}
           value={search}
+          onKeyDown={onKeyDown}
+          onChange={onChangeSearch}
+          placeholder="검색어를 입력하세요 ..."
         />
         <button onClick={onSubmit}>검색</button>
       </div>
@@ -42,5 +46,3 @@ function SearchableLayout({ children }: { children: ReactNode }) {
     </div>
   );
 }
-
-export default SearchableLayout;
