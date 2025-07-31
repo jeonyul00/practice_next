@@ -4,6 +4,7 @@ import BookItem from "@/components/book-item";
 import fetchBooks from "@/lib/fetch-books";
 import { BookData } from "@/types";
 import { useRouter } from "next/router";
+import Head from "next/head";
 
 export default function Page() {
   const [searchBooks, setSearchBooks] = useState<BookData[]>([]);
@@ -21,6 +22,11 @@ export default function Page() {
 
   return (
     <div>
+      <Head>
+        <title>검색 결과</title>
+        <meta property="og:image" content="/section02/public/thumbnail.png" />
+        <meta property="og:title" content="한 입 북스" />
+      </Head>
       {searchBooks.map((book) => (
         <BookItem key={book.id} {...book} />
       ))}
