@@ -1,12 +1,23 @@
-import React from "react";
+import BookItem from "@/components/book-item";
+import { BookData } from "@/types";
 
-async function Page({
+export default async function Page({
   searchParams,
 }: {
-  searchParams: Promise<{ q: string }>;
+  searchParams: { q?: string };
 }) {
-  const { q } = await searchParams;
-  return <div>search ::: {q}</div>;
-}
+  const response = await fetch(
+    `${process.env.NEXT_PUBIC_API_SERVER_URL}/book/search?q=${searchParams.q}`
+  );
 
-export default Page;
+  if (!response.ok) return <div>error</div>;
+
+  const books = await response.json();
+  return (
+    <div>
+      {books.map((book: BookData) => (
+        <BookItem key={book.id} {...book} />
+      ))}
+    </div>
+  );
+}

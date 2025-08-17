@@ -1,8 +1,33 @@
-import React from "react";
+import style from "./page.module.css";
 
-async function Page({ params }: { params: Promise<{ id: string }> }) {
+export default async function Page({
+  params,
+}: {
+  params: Promise<{ id: string | string[] }>;
+}) {
   const { id } = await params;
-  return <div>id ::: {id}</div>;
-}
+  const response = await fetch(
+    `${process.env.NEXT_PUBIC_API_SERVER_URL}/book/${id}`
+  );
+  if (!response.ok) return <div>eror</div>;
+  const book = await response.json();
 
-export default Page;
+  const { title, subTitle, description, author, publisher, coverImgUrl } = book;
+
+  return (
+    <div className={style.container}>
+      <div
+        className={style.cover_img_container}
+        style={{ backgroundImage: `url('${coverImgUrl}')` }}
+      >
+        <img src={coverImgUrl} />
+      </div>
+      <div className={style.title}>{title}</div>
+      <div className={style.subTitle}>{subTitle}</div>
+      <div className={style.author}>
+        {author} | {publisher}
+      </div>
+      <div className={style.description}>{description}</div>
+    </div>
+  );
+}
