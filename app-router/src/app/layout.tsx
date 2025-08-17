@@ -4,13 +4,14 @@ import style from "./layout.module.css";
 import { BookData } from "@/types";
 
 async function Footer() {
-  const response = await fetch(`${process.env.PUBLIC_API_SERVER_URL}/book`);
+  const response = await fetch(`${process.env.PUBLIC_API_SERVER_URL}/book`, {
+    cache: "force-cache",
+  });
   if (!response.ok) {
     return <footer>제작 율</footer>;
   }
   const books: BookData[] = await response.json();
   const bookCount = books.length;
-
   return (
     <footer>
       <div>prod yul</div>
